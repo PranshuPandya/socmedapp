@@ -19,42 +19,44 @@ User = get_user_model()
 @login_required
 def users_list(request):
 	# print('hi')
-	users = Profile.objects.exclude(user=request.user)
-	sent_friend_requests = FriendRequest.objects.filter(from_user=request.user)
-	my_friends = request.user.profile.friends.all()
-	sent_to = []
-	friends = []
-	for user in my_friends:
-		friend = user.friends.all()
-		for f in friend:
-			if f in friends:
-				friend = friend.exclude(user=f.user)
-		friends += friend
-	for i in my_friends:
-		if i in friends:
-			friends.remove(i)
-	if request.user.profile in friends:
-		friends.remove(request.user.profile)
-	random_list = random.sample(list(users), min(len(list(users)), 10))
-	for r in random_list:
-		if r in friends:
-			random_list.remove(r)
-	friends += random_list
-	for i in my_friends:
-		if i in friends:
-			friends.remove(i)
-		print("hi")
+    users = Profile.objects.exclude(user=request.user)
+    for us in Profile.objects.all():
+        print(us,us.id)
+    sent_friend_requests = FriendRequest.objects.filter(from_user=request.user)
+    my_friends = request.user.profile.friends.all()
+    sent_to = []
+    friends = []
+    for user in my_friends:
+        friend = user.friends.all()
+        for f in friend:
+            if f in friends:
+                friend = friend.exclude(user=f.user)
+        friends += friend
+    for i in my_friends:
+        if i in friends:
+            friends.remove(i)
+    if request.user.profile in friends:
+        friends.remove(request.user.profile)
+    random_list = random.sample(list(users), min(len(list(users)), 10))
+    for r in random_list:
+        if r in friends:
+            random_list.remove(r)
+    friends += random_list
+    for i in my_friends:
+        if i in friends:
+            friends.remove(i)
+        print("hi")
 
-	for se in sent_friend_requests:
-		sent_to.append(se.to_user)
+    for se in sent_friend_requests:
+        sent_to.append(se.to_user)
 
-	for f in friends:
-		f.id+=1
-	context = {
-		'users': friends,
-		'sent': sent_to
-	}
-	return render(request, "users/users_list.html", context)
+    for f in friends:
+        print(f,f.id,f.user,f.user.id,type(f),type(f.user))
+    context = {
+        'users': friends,
+        'sent': sent_to
+    }
+    return render(request, "users/users_list.html", context)
 
 
 def friend_list(request):
@@ -115,12 +117,15 @@ def delete_friend_request(request, id):
 
 
 def delete_friend(request, id):
-	user_profile = request.user.profile
-	friend_profile = get_object_or_404(Profile, id=id)
-	print(friend_profile)
-	user_profile.friends.remove(friend_profile)
-	friend_profile.friends.remove(user_profile)
-	return HttpResponseRedirect('/users/{}'.format(friend_profile.slug))
+    user_profile = request.user.profile
+    print(id)
+    for us in Profile.objects.all():
+        print("ehllo",us,us.id)
+    friend_profile = get_object_or_404(Profile, id=id)
+    print(friend_profile)
+    user_profile.friends.remove(friend_profile)
+    friend_profile.friends.remove(user_profile)
+    return HttpResponseRedirect('/users/{}'.format(friend_profile.slug))
 
 
 @login_required
@@ -129,7 +134,7 @@ def profile_view(request, slug1):
     print(request.user)
     print(Profile.objects.first())
     p = Profile.objects.filter(slug=slug1).first()
-    print(p)
+    print(p.id,p.user,slug1,p.user.id)
     u = p.user
     sent_friend_requests = FriendRequest.objects.filter(from_user=p.user)
     rec_friend_requests = FriendRequest.objects.filter(to_user=p.user)
@@ -151,9 +156,9 @@ def profile_view(request, slug1):
         if len(FriendRequest.objects.filter(
                 from_user=p.user).filter(to_user=request.user)) == 1:
             button_status = 'friend_request_received'
-
+    print(u.id)
     context = {
-        'u': u,
+        'u': p,
         'button_status': button_status,
         'friends_list': friends,
         'sent_friend_requests': sent_friend_requests,
@@ -210,7 +215,9 @@ def edit_profile(request):
 @login_required
 def my_profile(request):
     p = request.user.profile
+    print(p.id,p.user.id)
     you = p.user
+    print(type(p),type(you))
     sent_friend_requests = FriendRequest.objects.filter(from_user=you)
     rec_friend_requests = FriendRequest.objects.filter(to_user=you)
     user_posts = Post.objects.filter(user_name=you)
@@ -231,7 +238,7 @@ def my_profile(request):
             button_status = 'friend_request_received'
 
     context = {
-        'u': you,
+        'u': p,
         'button_status': button_status,
         'friends_list': friends,
         'sent_friend_requests': sent_friend_requests,
