@@ -1,6 +1,7 @@
 {% extends "feed/layout.html" %}
 {% load static %}
 {% block cssfiles %}
+    <link rel="stylesheet" href="{% static 'feed/base.css' %}">
 {% endblock cssfiles %}
 {% block searchform %}
 <form class="form-inline my-2 my-lg-0 ml-5" action="{% url 'search_posts' %}" method="get">
@@ -14,12 +15,12 @@
         <div class="col-md-8">
             {% for post in posts %}
             <div class="card card-signin my-5">
-                <div class="card-body">
+                <div class="card-body ">
+                    <p>hello</p>
                     <a href="{{ post.user_name.profile.get_absolute_url }}"><img
                             src="{{ post.user_name.profile.image.url }}" class="rounded-circle" width="30" height="30"
                             alt=""></a>
-                    <a class="text-dark" href="{{ post.user_name.profile.get_absolute_url }}"><b>{{ post.user_name
-                            }}</b></a>
+                    <a class="text-dark" href="{{ post.user_name.profile.get_absolute_url }}"><b>{{ post.user_name }}</b></a>
                     <br><small class="text-muted">Posted on {{ post.date_posted }}</small>
                     <br><br>
                     <p class="card-text text-dark">{{ post.description }}</p>
@@ -27,12 +28,12 @@
                 <a href="{% url 'post-detail' post.id %}"><img class="card-img-top" src="{{ post.pic.url }}" alt=""></a>
                 {% if post.tags %}
                 <br>
-                <p class="text-danger ml-3"><b>Tags: <i>{{ post.tags }}</i></b></p>
+                <p class="ml-3" style="color:#c79f9f;"><b>Tags: <i>{{ post.tags }}</i></b></p>
                 {% endif %}
                 <div class="card-footer">
                     <button class="btn btn-white mr-3 like" id="{{ post.id }}">
                         {% if post in liked_post %}
-                        <a href="{% url 'post-like' %}" style="color:red;" id="likebtn{{ post.id }}"> Unlike</a> |
+                        <a href="{% url 'post-like' %}" style="color:red" id="likebtn{{ post.id }}"> Unlike</a> |
                         {{post.likes.count}}
                         {% else %}
                         <a href="{% url 'post-like' %}" style="color:green;" id="likebtn{{ post.id }}"> Like</a> |
