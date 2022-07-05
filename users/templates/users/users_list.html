@@ -1,7 +1,7 @@
 {% extends "feed/layout.html" %} {% load static %} {% block cssfiles %} {% endblock cssfiles %} {% block searchform %}
 <form class="form-inline my-2 my-lg-0 ml-5" action="{% url 'search_users' %}" method="get">
     <input name="q" type="text" placeholder="Search users.." />
-    <button class="btn btn-success my-2 my-sm-0 ml-4" type="submit">
+    <button class="btn my-2 my-sm-0 ml-4" style="background-color: lightblue;" type="submit">
         Search
     </button>
 </form>
@@ -11,23 +11,26 @@
         <div class="col-md-8">
             {% if users %}
             <div class="card card-signin my-5">
-                <div class="card-body">
+                <div class="card-body" style="border: 2px solid black;">
                     {% for user_p in users %}
-                    <p> {{ user_p.id }} </p>
-                    <a href="{{ user_p.get_absolute_url }}"><img src="{{ user_p.image.url }}" class="rounded mr-2"
-                            width="40" height="40" alt="" /></a>
-                    <a class="text-dark" href="{{ user_p.get_absolute_url }}"><b>{{ user_p }}</b></a>
-                    {% if not user_p.user in sent %}
-                    <small class="float-right">
-                        <a class="btn btn-primary mr-2" href="{% url 'send_friend_request' user_p.user.id %}">Add Friend</a>
-                    </small>
-                    {% else %}
-                    <small class="float-right">
-                        <a class="btn btn-warning mr-2" href="{% url 'cancel_friend_request' user_p.user.id %}">Cancel
-                            Request</a>
-                    </small>
-                    {% endif %}
-                    <br /><br />
+                    <!-- <p> {{ user_p.id }} </p> -->
+                    <div>
+                        <a href="{{ user_p.get_absolute_url }}"><img src="{{ user_p.image.url }}" class="rounded mr-2"
+                                width="40" height="40" alt="" /></a>
+                        <a class="text-dark" href="{{ user_p.get_absolute_url }}"><b>{{ user_p }}</b></a>
+                        {% if not user_p.user in sent %}
+                        <small class="float-right">
+                            <a class="btn btn-primary mr-2" href="{% url 'send_friend_request' user_p.user.id %}">Add Friend</a>
+                        </small>
+                        {% else %}
+                        <small class="float-right">
+                            <a class="btn btn-warning mr-2" href="{% url 'cancel_friend_request' user_p.user.id %}">Cancel
+                                Request</a>
+                        </small>
+                        {% endif %}
+                        <br /><br />
+
+                    </div>
                     {% endfor %}
                 </div>
             </div>

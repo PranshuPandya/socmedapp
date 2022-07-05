@@ -1,7 +1,7 @@
 {% extends "feed/layout.html" %} {% load static %} {% block cssfiles %} {% endblock cssfiles %} {% block searchform %}
 <form class="form-inline my-2 my-lg-0 ml-5" action="{% url 'search_users' %}" method="get">
     <input name="q" type="text" placeholder="Search users.." />
-    <button class="btn btn-success my-2 my-sm-0 ml-4" type="submit">
+    <button class="btn my-2 my-sm-0 ml-4" style="background-color: lightblue;" type="submit">
         Search
     </button>
 </form>

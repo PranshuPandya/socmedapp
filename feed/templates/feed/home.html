@@ -6,7 +6,7 @@
   method="get"
 >
   <input name="p" type="text" placeholder="Search posts.." />
-  <button class="btn btn-success my-2 my-sm-0 ml-4" type="submit">
+  <button class="btn my-2 my-sm-0 ml-4" style="background-color: lightblue;" type="submit">
     Search
   </button>
 </form>
@@ -41,7 +41,7 @@
         /></a>
         {% if post.tags %}
         <br />
-        <p class="text-danger ml-3">
+        <p class="ml-3" style="color:#bf463d ;">
           <b>Tags: <i>{{ post.tags }}</i></b>
         </p>
         {% endif %}

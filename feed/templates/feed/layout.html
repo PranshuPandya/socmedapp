@@ -77,7 +77,7 @@
             <span class="navbar-toggler-icon"></span>
             </button>
   
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <ul class="nav navbar-nav navbar-center">
                     <li class="nav-item active">
                         <a class="nav-item nav-link" href="{% url 'home' %}">Home</a>
@@ -100,7 +100,7 @@
                 {% if user.is_authenticated %}
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-item nav-link btn btn-danger ml-4  text-light" href="{% url 'logout' %}">Logout</a>
+                        <a class="nav-item nav-link btn ml-4  text-light" style="background-color: #bf463d" href="{% url 'logout' %}">Logout</a>
                     </li>
                 </ul>
                 {% endif %}

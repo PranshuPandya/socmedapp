@@ -6,7 +6,7 @@
 {% block searchform %}
 <form class="form-inline my-2 my-lg-0 ml-5" action="{% url 'search_posts' %}" method="get">
     <input name="p" type="text" placeholder="Search posts..">
-    <button class="btn btn-success my-2 my-sm-0 ml-4" type="submit">Search</button>
+    <button class="btn my-2 my-sm-0 ml-4" style="background-color: lightblue;" type="submit">Search</button>
 </form>
 {% endblock searchform %}
 {% block content %}
@@ -28,7 +28,7 @@
                 <a href="{% url 'post-detail' post.id %}"><img class="card-img-top" src="{{ post.pic.url }}" alt=""></a>
                 {% if post.tags %}
                 <br>
-                <p class="ml-3" style="color:#c79f9f;"><b>Tags: <i>{{ post.tags }}</i></b></p>
+                <p class="ml-3" style="background-color: #bf463d;"><b>Tags: <i>{{ post.tags }}</i></b></p>
                 {% endif %}
                 <div class="card-footer">
                     <button class="btn btn-white mr-3 like" id="{{ post.id }}">
