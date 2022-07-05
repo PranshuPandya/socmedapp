@@ -4,10 +4,15 @@
 {% block cssfiles %}
 {% endblock cssfiles %}
 {% block searchform %}
-<form class="form-inline my-2 my-lg-0 ml-5" action="{% url 'search_posts' %}" method="get">
-    <input name="p" type="text" placeholder="Search posts..">
-    <button class="btn btn-success my-2 my-sm-0 ml-4" type="submit">Search</button>
-</form>
+<ul class="navbar-nav">
+    <li class="nav-item">
+        <form class="form-inline my-2 my-lg-0 justify-content-end" action="{% url 'search_posts' %}" method="get">
+            <input class="form-control mr-sm-2 navbar-nav" name="p" type="text" placeholder="Search posts..">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </li>
+</ul>
+
 {% endblock searchform %}
 {% block content %}
 <br><br>

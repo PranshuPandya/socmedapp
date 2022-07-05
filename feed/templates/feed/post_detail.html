@@ -13,16 +13,15 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
-            <div class="card card-signin my-5">
+            <div class="card card-signin my-5 bg-dark border border-info round">
                 <div class="card-body">
                     <a href="{{ post.user_name.profile.get_absolute_url }}"><img
                             src="{{ post.user_name.profile.image.url }}" class="rounded-circle" width="30" height="30"
                             alt=""></a>
-                    <a class="text-dark" href="{{ post.user_name.profile.get_absolute_url }}"><b>{{ post.user_name
-                            }}</b></a>
-                    <br><small class="text-muted">Posted on {{ post.date_posted }}</small>
+                    <a class="text-light" href="{{ post.user_name.profile.get_absolute_url }}"><b>{{ post.user_name }}</b></a>
+                    <br><small class="text-muted text-light">Posted on {{ post.date_posted }}</small>
                     <br><br>
-                    <p class="card-text text-dark">{{ post.description }}</p>
+                    <p class="card-text text-light">{{ post.description }}</p>
                 </div>
                 <a href="{{ post.pic.url }}"><img class="card-img-top" src="{{ post.pic.url }}" alt=""></a>
                 {% if post.tags %}
@@ -49,14 +48,14 @@
         </div>
     </div>
     <br>
-    <h4>Comments</h4>
+    <h4 style="color: white;">Comments</h4>
     <div class="row">
         <div class="col-md-8">
-            <div class="card card-signin my-5">
+            <div class="card card-signin my-5 bg-dark">
                 <div class="card-body">
                     <form class="form-signin" method="POST">
                         {% csrf_token %}
-                        <fieldset class="form-group"><br>
+                        <fieldset class="form-group" style="color: white;"><br>
                             {{ form|crispy }}
                         </fieldset>
                         <div class="form-group">
@@ -70,17 +69,16 @@
     <div class="row">
         <div class="col-md-8">
             {% if post.details.all %}
-            <div class="card card-signin my-5">
+            <div class="card card-signin my-5 bg-dark">
                 {% for detail in post.details.all %}
-                <div class="card-body">
+                <div class="card-body ">
                     <a href="{{ detail.username.profile.get_absolute_url }}">
                         <img src="{{ detail.username.profile.image.url }}" class="rounded-circle" width="30" height="30"
                             alt="">
                     </a>
-                    <a class="text-dark" href="{{ detail.username.profile.get_absolute_url }}"><b>{{ detail.username
-                            }}</b></a>
+                    <a class="text-light" href="{{ detail.username.profile.get_absolute_url }}"><b>{{ detail.username }}</b></a>
                     <br><small>{{ detail.comment_date }}</small><br><br>
-                    <p class="card-text text-dark">{{ detail.comment }}</p>
+                    <p class="card-text text-light">{{ detail.comment }}</p>
                 </div>
                 <hr class="my-1">
                 {% endfor %}
