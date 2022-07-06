@@ -2,7 +2,7 @@
 {% endblock cssfiles %} {% block searchform %}
 <form class="form-inline my-2 my-lg-0 ml-5" action="{% url 'search_users' %}" method="get">
     <input name="q" type="text" placeholder="Search users.." />
-    <button class="btn btn-success my-2 my-sm-0 ml-4" type="submit">
+    <button class="btn my-2 my-sm-0 ml-4" style="background-color: lightblue;" type="submit">
         Search
     </button>
 </form>
@@ -14,20 +14,20 @@
             <div class="card card-signin my-5">
                 <div class="card-body">
                     {% for user_p in friends %}
-                    <P>{{ user_p.id }}</P>
+                    <!-- <P>{{ user_p.id }}</P> -->
                     <a href="{{ user_p.get_absolute_url }}"><img src="{{ user_p.image.url }}" class="rounded mr-2"
                             width="40" height="40" alt="" /></a>
-                    <a class="text-dark" href="{{ user_p.get_absolute_url }}"><b>{{ user_p }}</b></a>
-                    <small><a class="btn btn-danger float-right"
+                    <a class="text-dark href="{{ user_p.get_absolute_url }}"><b>{{ user_p }}</b></a>
+                    <small><a class="btn float-right" style="background: #bf463d; color: white;"
                             href="{% url 'delete_friend' user_p.id %}">UnFriend</a></small>
                     <br /><br />
                     {% endfor %}
                 </div>
             </div>
             {% else %}
-            <h5>
+            <h5 class="text-light">
                 <i>You have no friends now! Make some new
-                    <a href="{% url 'users_list' %}">friends here!</a></i>
+                    <a class="text-light" href="{% url 'users_list' %}">friends here!</a></i>
             </h5>
             {% endif %}
         </div>
